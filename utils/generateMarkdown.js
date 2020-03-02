@@ -4,8 +4,7 @@ var api = require("./api");
 function generateMarkdown(data) {
   //console.log("In generateMarkdown");
   return api.getUser(data.username).then(function(response){
-    console.log(response);
-  
+
 
         return `
         # Table of contents
