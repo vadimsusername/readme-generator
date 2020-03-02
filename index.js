@@ -42,39 +42,34 @@ const questions = [
     }
 
 ];
-/*
+
 var inquirer = require("inquirer");
-inquirer.prompt(questions).then(function(answers){
-    
-    console.log(answers.username);
-    console.log(answers.title);
-    console.log(answers.description);
-    console.log(answers.usage);
-    console.log(answers.collaborators);
-    console.log(answers.assets);
-    console.log(answers.tutorials);
-    console.log(answers.license);
-    //generaterMarkDown(answers);
-});
-*/
-var answers = {
-    username: "vadimsusername",
-    title: "readme-generator",
-    description: "takes user input, then generates a readme.md",
-    usage: "answer questions when prompted",
-    collaborators: "none",
-    assets: "inquirer.js,axios.js",
-    tutorials: "https://guides.github.com/features/mastering-markdown/",
-    license: "MIT License"
-}
-
 var generateMarkdown = require("./utils/generateMarkdown.js");
+fs = require("fs");
 
-var readme = generateMarkdown(answers);
-//console.log(readme);
+inquirer.prompt(questions).then(function(answers){
+    generateMarkdown(answers).then(function(response){
 
-function writeToFile(fileName, data) {
-}
+
+        console.log(response);
+    
+        fs.writeFile(`${answers.title}README.md`, response, function(err) {
+    
+            if (err) {
+              return console.log(err);
+            }
+          
+            console.log("Success!");
+          
+          });
+          
+    
+    
+    });
+    
+  
+});
+
 
 function init() {
 
